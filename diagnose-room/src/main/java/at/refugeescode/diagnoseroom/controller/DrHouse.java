@@ -28,7 +28,7 @@ public class DrHouse {
 
     private String figureOutIllness(Map<String, List<String>> illnesses, List<String> patientSymptoms) {
         return illnesses.entrySet().stream()
-                .filter(e -> e.getValue().containsAll(patientSymptoms)&&e.getValue().size()==patientSymptoms.size())
+                .filter(e -> e.getValue().containsAll(patientSymptoms) && e.getValue().size() == patientSymptoms.size())
                 .map(e -> e.getKey())
                 .findFirst().orElse("Lupus");
     }
