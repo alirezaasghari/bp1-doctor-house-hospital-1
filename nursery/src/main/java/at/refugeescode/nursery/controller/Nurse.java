@@ -2,6 +2,7 @@ package at.refugeescode.nursery.controller;
 
 import at.refugeescode.nursery.parser.TreatmentEncyclopedia;
 import at.refugeescode.nursery.persistance.model.Patient;
+import at.refugeescode.nursery.persistance.repository.PatientRepository;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.stream.Collectors;
 public class Nurse {
 
     private TreatmentEncyclopedia treatmentEncyclopedia;
+    private PatientRepository patientRepository;
 
-    public Nurse(TreatmentEncyclopedia treatmentEncyclopedia) {
+    public Nurse(TreatmentEncyclopedia treatmentEncyclopedia, PatientRepository patientRepository) {
         this.treatmentEncyclopedia = treatmentEncyclopedia;
+        this.patientRepository = patientRepository;
     }
 
     public Patient treat(Patient patient) {
@@ -23,12 +26,13 @@ public class Nurse {
         String patientIllness = patient.getIllness();
         String treatment = provideTreatment(treatments, patientIllness);
         patient.setTreatment(treatment);
+        patientRepository.save(patient);
         return patient;
     }
 
-    private String provideTreatment(Map<String, List<String>> treatments, String illness) {
+    private String provideTreatment(Map<String, List<String>> treatments, String patientIllness) {
         return treatments.entrySet().stream()
-                .filter(e -> e.getKey().contains(illness))
+                .filter(e -> e.getKey().contains(patientIllness))
                 .map(e -> e.getValue().stream().collect(Collectors.joining(", ")))
                 .findFirst().orElse("No cure for this illness.");
     }

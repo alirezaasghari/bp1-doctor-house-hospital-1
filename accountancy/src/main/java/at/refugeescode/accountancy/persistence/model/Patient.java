@@ -1,30 +1,32 @@
 package at.refugeescode.accountancy.persistence.model;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Patient {
 
     @Id
     @GeneratedValue
-    private String id;
+    @JsonIgnore
+    private Long id;
 
     private String patientNumber;
 
     private String name;
 
-    private List<String> symptoms;
-
     private String illness;
 
-    public String getId() {
+    private String treatment;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,14 +46,6 @@ public class Patient {
         this.name = name;
     }
 
-    public List<String> getSymptoms() {
-        return symptoms;
-    }
-
-    public void setSymptoms(List<String> symptoms) {
-        this.symptoms = symptoms;
-    }
-
     public String getIllness() {
         return illness;
     }
@@ -60,14 +54,22 @@ public class Patient {
         this.illness = illness;
     }
 
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", patientNumber='" + patientNumber + '\'' +
                 ", name='" + name + '\'' +
-                ", symptoms=" + symptoms +
                 ", illness='" + illness + '\'' +
+                ", treatment='" + treatment + '\'' +
                 '}';
     }
 }
