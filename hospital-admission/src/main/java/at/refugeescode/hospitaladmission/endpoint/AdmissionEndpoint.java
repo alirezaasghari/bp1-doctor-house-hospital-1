@@ -14,18 +14,17 @@ import java.util.UUID;
 @RequestMapping("/patients")
 public class AdmissionEndpoint {
 
+    @Value("${diagnoseroom.url}")
+    String diagnoseRoomUrl;
     private RestTemplate restTemplate;
 
     public AdmissionEndpoint(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    @Value("${diagnoseroom.url}")
-    String diagnoseRoomUrl;
-
     @PostMapping
     void getPatient(@RequestBody Patient patient) {
         patient.setPatientNumber(UUID.randomUUID().toString());
-        restTemplate.postForEntity(diagnoseRoomUrl, patient, String.class);
+        restTemplate.postForEntity(diagnoseRoomUrl, patient,Void.class);
     }
 }

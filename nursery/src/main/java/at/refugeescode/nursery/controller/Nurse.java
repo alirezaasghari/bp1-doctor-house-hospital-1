@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class Nurse {
@@ -16,22 +17,19 @@ public class Nurse {
         this.treatmentEncyclopedia = treatmentEncyclopedia;
     }
 
-    public Patient treatment(Patient patient) {
+    public Patient treat(Patient patient) {
 
         Map<String, List<String>> treatments = treatmentEncyclopedia.getTreatments();
         String patientIllness = patient.getIllness();
-
         String treatment = provideTreatment(treatments, patientIllness);
         patient.setTreatment(treatment);
-
         return patient;
     }
 
     private String provideTreatment(Map<String, List<String>> treatments, String illness) {
         return treatments.entrySet().stream()
-                .filter(e -> e.getValue().contains(illness))
-                .map(e -> e.getKey())
-                .findFirst().orElse("No Treatment");
+                .filter(e -> e.getKey().contains(illness))
+                .map(e -> e.getValue().stream().collect(Collectors.joining(", ")))
+                .findFirst().orElse("No cure for this illness.");
     }
-
 }

@@ -1,7 +1,7 @@
-package at.refugeescode.diagnoseroom.endpoint;
+package at.refugeescode.nursery.endpoint;
 
-import at.refugeescode.diagnoseroom.controller.DrHouse;
-import at.refugeescode.diagnoseroom.model.Patient;
+import at.refugeescode.nursery.controller.Nurse;
+import at.refugeescode.nursery.persistance.model.Patient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,21 +11,21 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/patients")
-public class DiagnoseEndpoint {
+public class NurseryEndpoint {
 
-    @Value("${nursery.url}")
-    String nurseryUrl;
+    @Value("${accountancy.url}")
+    String accountancyUrl;
     private RestTemplate restTemplate;
-    private DrHouse drHouse;
+    private Nurse nurse;
 
-    public DiagnoseEndpoint(RestTemplate restTemplate, DrHouse drHouse) {
+    public NurseryEndpoint(RestTemplate restTemplate, Nurse nurse) {
         this.restTemplate = restTemplate;
-        this.drHouse = drHouse;
+        this.nurse = nurse;
     }
 
     @PostMapping
     void getPatient(@RequestBody Patient patient) {
-        Patient drHouseDiagnosis = drHouse.diagnose(patient);
-        restTemplate.postForEntity(nurseryUrl, drHouseDiagnosis, Void.class);
+        Patient curedPatient = nurse.treat(patient);
+        restTemplate.postForEntity(accountancyUrl, curedPatient, Void.class);
     }
 }
