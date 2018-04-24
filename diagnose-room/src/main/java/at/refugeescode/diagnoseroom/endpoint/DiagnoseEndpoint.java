@@ -20,6 +20,5 @@ public class DiagnoseEndpoint {
     @PostMapping
     void getPatient(@RequestBody Patient patient) {
         Patient drHouseDiagnosis = drHouse.diagnose(patient);
-        System.out.println(drHouseDiagnosis);
     }
 }

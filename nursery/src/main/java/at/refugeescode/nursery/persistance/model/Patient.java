@@ -1,8 +1,15 @@
-package at.refugeescode.diagnoseroom.model;
+package at.refugeescode.nursery.persistance.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Id;
 import java.util.List;
 
+@Document
 public class Patient {
+
+    @Id
+    private String id;
 
     private String patientNumber;
 
@@ -11,6 +18,28 @@ public class Patient {
     private List<String> symptoms;
 
     private String illness;
+
+    private String treatment;
+
+    public Patient() {
+
+    }
+
+    public Patient(String patientNumber, String name, List<String> symptoms, String illness, String treatment) {
+        this.patientNumber = patientNumber;
+        this.name = name;
+        this.symptoms = symptoms;
+        this.illness = illness;
+        this.treatment = treatment;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPatientNumber() {
         return patientNumber;
@@ -44,14 +73,23 @@ public class Patient {
         this.illness = illness;
     }
 
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
-                "patientNumber='" + patientNumber + '\'' +
+                "id='" + id + '\'' +
+                ", patientNumber='" + patientNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", symptoms=" + symptoms +
                 ", illness='" + illness + '\'' +
+                ", treatment='" + treatment + '\'' +
                 '}';
     }
 }
-

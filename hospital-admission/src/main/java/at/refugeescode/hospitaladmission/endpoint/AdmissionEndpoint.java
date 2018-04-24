@@ -25,7 +25,7 @@ public class AdmissionEndpoint {
 
     @PostMapping
     void getPatient(@RequestBody Patient patient) {
-        patient.setId(UUID.randomUUID().toString());
+        patient.setPatientNumber(UUID.randomUUID().toString());
         restTemplate.postForEntity(diagnoseRoomUrl, patient, String.class);
     }
 }
