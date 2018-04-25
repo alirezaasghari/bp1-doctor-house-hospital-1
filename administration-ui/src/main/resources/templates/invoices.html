@@ -27,10 +27,13 @@
             </button>
             <a class="navbar-brand" href="#myPage">Alireza</a>
         </div>
+        <form class="navbar-form navbar-right" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn  btn-sm btn-danger"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
+        </form>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">HOME</a></li>
-                <li><a href="/invoices">INVOICES</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/invoices">Invoices</a></li>
             </ul>
         </div>
     </div>
