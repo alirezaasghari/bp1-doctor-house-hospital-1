@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="accountancy" />
+        <module name="administration-ui" />
         <module name="diagnose-room" />
         <module name="hospital-admission" />
         <module name="nursery" />
@@ -14,6 +15,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="accountancy" target="9" />
+      <module name="administration-ui" target="9" />
       <module name="diagnose-room" target="9" />
       <module name="hospital-admission" target="9" />
       <module name="nursery" target="9" />
