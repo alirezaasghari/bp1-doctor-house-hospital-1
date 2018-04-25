@@ -33,7 +33,7 @@ public class Accountant {
         Double cost = provideCost(costs, patientIllness);
 
         invoice.setCost(cost);
-        invoice.setDate(LocalDateTime.now());
+        invoice.setDateTime(LocalDateTime.now());
         Patient savedPatient = patientRepository.save(patient);
         invoice.setPatient(savedPatient);
         invoiceRepository.save(invoice);

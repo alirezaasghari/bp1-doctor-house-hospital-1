@@ -1,20 +1,15 @@
-package at.refugeescode.accountancy.persistence.model;
+package at.refugeescode.administrationui.model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 public class Invoice {
 
-    @Id
-    @GeneratedValue
     private Long id;
 
     private Double cost;
 
     private LocalDateTime dateTime;
 
-    @OneToOne(cascade = CascadeType.ALL)
     private Patient patient;
 
     public Invoice() {
